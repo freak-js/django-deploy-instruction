@@ -1,23 +1,23 @@
 # django-deploy-instruction
 ## Инструкция-заметки по развертыванию django приложения на слабом сервере без docker.
 
-***sudo apt-get update***
+_sudo apt-get update_
 
-***sudo apt-get upgrade***
+_sudo apt-get upgrade_
 
 **Проверяем есть ли проблемы с локалью:**
 
-***perl -v***
+_perl -v_
 
 **если есть ошибки — генерируем реконфигурируем локаль:**
 
-***locale-gen en_US en_US.UTF-8 ru_RU.UTF-8***
+_locale-gen en_US en_US.UTF-8 ru_RU.UTF-8_
 
-***dpkg-reconfigure locales***
+_dpkg-reconfigure locales_
 
 **и снова проверяем на ошибки:**
 
-***perl -v***
+_perl -v_
 ____________________________
 
 Устанавливаем python 3.8.1:
