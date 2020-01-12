@@ -153,9 +153,7 @@ _sudo journalctl -u gunicorn_
 
 **Ссылка на туториал:**
 
-```
-https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04#create-a-gunicorn-systemd-service-file
-```
+_https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04#create-a-gunicorn-systemd-service-file_
 
 **Что-бы внести изменения в файл конфигурации gunicorne выполнить после изменений:**
 
