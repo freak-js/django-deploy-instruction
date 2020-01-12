@@ -147,7 +147,7 @@ _sudo systemctl enable gunicorn_
 
 _sudo systemctl status gunicorn_
 
-**Если есть какие0то ошибки, то проверяем журнал:**
+**Если есть какие-то ошибки, то проверяем журнал:**
 
 _sudo journalctl -u gunicorn_
 
