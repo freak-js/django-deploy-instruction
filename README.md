@@ -1,5 +1,6 @@
 # django-deploy-instruction
 ## Инструкция-заметки по развертыванию django приложения на слабом сервере без docker.
+## AdminVPS тариф VPSLite
 
 ### Обновляем пакеты из репозитория:
 
@@ -59,7 +60,7 @@ _python3.8 -V_
 
 ____________________________
 
-**Сносим apache2:**
+### Сносим apache2:
 
 _sudo service apache2 stop_
 
@@ -81,7 +82,7 @@ _Пример: sudo rm -Rf /usr/sbin/apache2 /usr/lib/apache2 /etc/apache2 /usr/
 
 ____________________________
 
-**Генерируем виртуальное окружениев каталоге /home(предварительно перейдя туда и создав папку проекта внутри):**
+### Генерируем виртуальное окружениев каталоге /home(предварительно перейдя туда и создав папку проекта внутри):
 
 _mkdir bergauf_
 
@@ -90,7 +91,7 @@ _cd bergauf_
 _python3.8 -m venv myvenv_
 ____________________________
 
-**Устанавливаем git, nginx, gunicorn, htop, nano:**
+### Устанавливаем git, nginx, gunicorn, htop, nano:
 
 _sudo apt-get install htop (устанавливается глобально)_
 
@@ -107,24 +108,21 @@ _pip install gunicorn (внутри виртуального окружения)
 _git clone ..._
 ____________________________
 
-Проверяем работу Gunicorne:
+### Проверяем работу Gunicorne:
 
-cd ~/myproject
+_cd ~/myproject_
 
-gunicorn --bind 0.0.0.0:8000 myproject.wsgi
+_gunicorn --bind 0.0.0.0:8000 myproject.wsgi_
 
 ____________________________
 
-Создаем сервисный файл Gunicorn systemd:
+### Создаем сервисный файл Gunicorn systemd:
 
-sudo nano /etc/systemd/system/gunicorn.service
+_sudo nano /etc/systemd/system/gunicorn.service_
 
-**********
-Внутри файла пишем следующее:
-**********
+**Внутри файла пишем следующее:**
 
-"""
-
+```
 [Unit]
 Description=gunicorn daemon
 After=network.target
@@ -137,58 +135,59 @@ ExecStart=/home/bergauf/myvenv/bin/gunicorn --access-logfile - --workers 3 --bin
 
 [Install]
 WantedBy=multi-user.target
+```
 
-"""
-Стартуем и автозапускаем службу:
+**Стартуем и автозапускаем службу:**
 
-sudo systemctl start gunicorn
+_sudo systemctl start gunicorn_
 
-sudo systemctl enable gunicorn
+_sudo systemctl enable gunicorn_
 
-Проверяем состояние процесса:
+**Проверяем состояние процесса:**
 
-sudo systemctl status gunicorn
+_sudo systemctl status gunicorn_
 
-Если есть какие0то ошибки, то проверяем журнал:
+**Если есть какие0то ошибки, то проверяем журнал:**
 
-sudo journalctl -u gunicorn
+_sudo journalctl -u gunicorn_
 
-Ссылка на туториал:
+**Ссылка на туториал:**
 
+```
 https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04#create-a-gunicorn-systemd-service-file
+```
 
-**********
-Что-бы внести изменения в файл конфигурации gunicorne выполнить после изменений:
+**Что-бы внести изменения в файл конфигурации gunicorne выполнить после изменений:**
 
-sudo systemctl daemon-reload
+_sudo systemctl daemon-reload_
 
-sudo systemctl restart gunicorn
-**********
-
+_sudo systemctl restart gunicorn_
 ____________________________
 
-Перед настройкой nginx меняем настройки проекта:
+### Перед настройкой nginx меняем настройки проекта:
 
+```
 DEBUG = False
 
 ALLOWED_HOSTS = ['айпишник сервера или имя домена']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+```
 
-Выполняем внутри виртального окружения:
+**Выполняем внутри виртального окружения:**
 
-python manage.py collectstatic
+_python manage.py collectstatic_
 ____________________________
 
-Настройка Nginx на Proxy Pass для Gunicorn:
+### Настройка Nginx на Proxy Pass для Gunicorn:
 
-sudo nano /etc/nginx/sites-available/myproject
+_sudo nano /etc/nginx/sites-available/myproject_
 
-**********
-Внутри файла пишем следующее:
-**********
 
-"""
+**Внутри файла пишем следующее:**
+
+
+```
 server {
     listen 80;
     server_name 45.128.204.29;
@@ -203,16 +202,16 @@ server {
         proxy_pass http://unix:/home/bergauf/bergauf.sock;
     }
 }
-"""
+```
 
-Включаем файл, связав его с sites-enabled каталогом:
+**Включаем файл, связав его с sites-enabled каталогом:**
 
-sudo ln -s /etc/nginx/sites-available/bergauf /etc/nginx/sites-enabled
+_sudo ln -s /etc/nginx/sites-available/bergauf /etc/nginx/sites-enabled_
 
-Проверка конфигурации Nginx на наличие синтаксических ошибок:
+**Проверка конфигурации Nginx на наличие синтаксических ошибок:**
 
-sudo nginx -t
+_sudo nginx -t_
 
-Если об ошибках не сообщается, перезапустить Nginx:
+**Если об ошибках не сообщается, перезапустить Nginx:**
 
-sudo systemctl restart nginx
+_sudo systemctl restart nginx_
