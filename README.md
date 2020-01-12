@@ -5,6 +5,8 @@ _sudo apt-get update_
 
 _sudo apt-get upgrade_
 
+____________________________
+
 **Проверяем есть ли проблемы с локалью:**
 
 _perl -v_
@@ -18,6 +20,8 @@ _dpkg-reconfigure locales_
 **и снова проверяем на ошибки:**
 
 _perl -v_
+
+____________________________
 
 **Устанавливаем python 3.8.1:**
 
@@ -51,6 +55,8 @@ _sudo make altinstall_
 
 _python3.8 -V_
 
+____________________________
+
 **Сносим apache2:**
 
 _sudo service apache2 stop_
@@ -67,35 +73,36 @@ _whereis apache2_
 
 _sudo rm -Rf (сюда вставить вывод от прошлой команды, если он есть)_
 
-**********
-Пример: sudo rm -Rf /usr/sbin/apache2 /usr/lib/apache2 /etc/apache2 /usr/share/apache2 /usr/share/man/man8/apache2.8.gz
-**********
 ____________________________
 
-Генерируем виртуальное окружениев каталоге /home(предварительно перейдя туда и создав папку проекта внутри):
+_Пример: sudo rm -Rf /usr/sbin/apache2 /usr/lib/apache2 /etc/apache2 /usr/share/apache2 /usr/share/man/man8/apache2.8.gz_
 
-mkdir bergauf
-
-cd bergauf
-
-python3.8 -m venv myvenv
 ____________________________
 
-Устанавливаем git, nginx, gunicorn, htop, nano:
+**Генерируем виртуальное окружениев каталоге /home(предварительно перейдя туда и создав папку проекта внутри):**
 
-sudo apt-get install htop   (устанавливается глобально)
+_mkdir bergauf_
 
-sudo apt-get install git   (устанавливается глобально)
+_cd bergauf_
 
-sudo apt-get install nginx   (устанавливается глобально)
+_python3.8 -m venv myvenv_
+____________________________
 
-sudo apt install nano   (устанавливается глобально)
+**Устанавливаем git, nginx, gunicorn, htop, nano:**
 
-pip install gunicorn   (внутри виртуального окружения)
+_sudo apt-get install htop (устанавливается глобально)_
 
-Клонируем репозиторий из github:
+_sudo apt-get install git (устанавливается глобально)_
 
-git clone ...
+_sudo apt-get install nginx (устанавливается глобально)_
+
+_sudo apt install nano (устанавливается глобально)_
+
+_pip install gunicorn (внутри виртуального окружения)_
+
+**Клонируем репозиторий из github:**
+
+_git clone ..._
 ____________________________
 
 Проверяем работу Gunicorne:
