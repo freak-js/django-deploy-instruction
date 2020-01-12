@@ -18,55 +18,54 @@ _dpkg-reconfigure locales_
 **и снова проверяем на ошибки:**
 
 _perl -v_
-____________________________
 
-Устанавливаем python 3.8.1:
-sudo apt install build-essential checkinstall
+**Устанавливаем python 3.8.1:**
 
-sudo apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+_sudo apt install build-essential checkinstall_
 
-Установка Tkinter:
+_sudo apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev_
 
-sudo apt install python3-tk
+**Установка Tkinter:**
 
-Скачиваем архив с дистрибутивом языка в каталог /opt:
+_sudo apt install python3-tk_
 
-cd /opt
+**Скачиваем архив с дистрибутивом языка в каталог /opt:**
 
-sudo wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz
+_cd /opt_
 
-Распаковываем файл исходного кода из архива:
+_sudo wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz_
 
-sudo tar xzf Python-3.8.1.tgz
+**Распаковываем файл исходного кода из архива:**
 
-Компиляции исходного кода Python:
+_sudo tar xzf Python-3.8.1.tgz_
 
-cd Python-3.8.1
+**Компиляции исходного кода Python:**
 
-sudo ./configure --enable-optimizations
+_cd Python-3.8.1_
 
-sudo make altinstall
+_sudo ./configure --enable-optimizations_
 
-Проверка версии python на удаленной машине:
+_sudo make altinstall_
 
-python3.8 -V
-____________________________
+**Проверка версии python на удаленной машине:**
 
-Сносим apache2:
+_python3.8 -V_
 
-sudo service apache2 stop
+**Сносим apache2:**
 
-sudo apt-get remove --purge apache2 apache2-utils apache2.2-bin apache2-common
+_sudo service apache2 stop_
 
-sudo update-rc.d -f apache2 remove
+_sudo apt-get remove --purge apache2 apache2-utils apache2.2-bin apache2-common_
 
-sudo apt-get autoremove
+_sudo update-rc.d -f apache2 remove_
 
-sudo apt-get autoclean
+_sudo apt-get autoremove_
 
-whereis apache2
+_sudo apt-get autoclean_
 
-sudo rm -Rf (сюда вставить вывод от прошлой команды, если он есть)
+_whereis apache2_
+
+_sudo rm -Rf (сюда вставить вывод от прошлой команды, если он есть)_
 
 **********
 Пример: sudo rm -Rf /usr/sbin/apache2 /usr/lib/apache2 /etc/apache2 /usr/share/apache2 /usr/share/man/man8/apache2.8.gz
