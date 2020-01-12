@@ -84,9 +84,9 @@ ____________________________
 
 ### Генерируем виртуальное окружениев каталоге /home(предварительно перейдя туда и создав папку проекта внутри):
 
-_mkdir bergauf_
+_mkdir имя_папки_с_проектом_
 
-_cd bergauf_
+_cd имя_папки_с_проектом_
 
 _python3.8 -m venv myvenv_
 ____________________________
@@ -105,14 +105,14 @@ _pip install gunicorn (внутри виртуального окружения)
 
 **Клонируем репозиторий из github:**
 
-_git clone ..._
+_git clone адрес_репозитория..._
 ____________________________
 
 ### Проверяем работу Gunicorne:
 
-_cd ~/myproject_
+_cd ~/имя_папки_с_проектом_
 
-_gunicorn --bind 0.0.0.0:8000 myproject.wsgi_
+_gunicorn --bind 0.0.0.0:8000 имя_проекта.wsgi_
 
 ____________________________
 
@@ -130,8 +130,8 @@ After=network.target
 [Service]
 User=root
 Group=www-data
-WorkingDirectory=/home/bergauf/bergauf
-ExecStart=/home/bergauf/myvenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/bergauf/bergauf.sock bergauf.wsgi:application
+WorkingDirectory=/home/имя_папки_с_проектом/имя_проекта
+ExecStart=/home/имя_папки_с_проектом/myvenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/имя_папки_с_проектом/имя_проекта.sock имя_проекта.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
@@ -179,7 +179,7 @@ ____________________________
 
 ### Настройка Nginx на Proxy Pass для Gunicorn:
 
-_sudo nano /etc/nginx/sites-available/myproject_
+_sudo nano /etc/nginx/sites-available/имя_проекта_
 
 
 **Внутри файла пишем следующее:**
@@ -192,19 +192,19 @@ server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/bergauf/bergauf;
+        root /home/имя_папки_с_проектом/имя_проекта;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/bergauf/bergauf.sock;
+        proxy_pass http://unix:/home/имя_папки_с_проектом/имя_проекта.sock;
     }
 }
 ```
 
 **Включаем файл, связав его с sites-enabled каталогом:**
 
-_sudo ln -s /etc/nginx/sites-available/bergauf /etc/nginx/sites-enabled_
+_sudo ln -s /etc/nginx/sites-available/имя_проекта /etc/nginx/sites-enabled_
 
 **Проверка конфигурации Nginx на наличие синтаксических ошибок:**
 
