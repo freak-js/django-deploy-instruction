@@ -1,4 +1,4 @@
-# django-deploy-instruction
+# django-instruction
 ## Инструкция-заметки по развертыванию django приложения на слабом сервере без docker.
 ## AdminVPS тариф VPSLite
 
