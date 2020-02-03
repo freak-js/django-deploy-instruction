@@ -222,6 +222,8 @@ server {
 
 **Включаем файл, связав его с sites-enabled каталогом:**
 
+**ПРОБЕЛ МЕЖДУ .../имя_проекта И /etc/nginx/... ОБЯЗАТЕЛЕН!!!**
+
 _sudo ln -s /etc/nginx/sites-available/имя_проекта /etc/nginx/sites-enabled_
 
 **Проверка конфигурации Nginx на наличие синтаксических ошибок:**
