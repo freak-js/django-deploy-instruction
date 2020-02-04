@@ -231,3 +231,5 @@ _sudo nginx -t_
 **Если об ошибках не сообщается, перезапустить Nginx:**
 
 _sudo systemctl restart nginx_
+
+_sudo systemctl restart gunicorn_
