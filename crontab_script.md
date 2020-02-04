@@ -6,7 +6,7 @@ _touch имя_скрипта_
 
 **Заходим в файл, пишем:**
 
-_#!/bin/bash
+_#!/bin/bash_
 
 cp -n /home/sergey/data(файл-цель) /home/$(date +"%Y-%m-%d-%H:%M").sqlite3(конечный файл)_
 
