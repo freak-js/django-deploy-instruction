@@ -1,59 +1,61 @@
-Создаем новый репозиторий, пишем README.md и копируем путь для клонирования.
+# Напоминалка по созданию нового проекта в ручном режиме.
 
-Из домашнего каталога:
+**Создаем новый репозиторий, пишем README.md и копируем путь для клонирования.**
 
-mkdir имя_каталога_с_виртуальным_окружением
+**Из домашнего каталога:**
 
-cd имя_каталога_с_виртуальным_окружением
+_mkdir имя_каталога_с_виртуальным_окружением_
 
-python3.8 -m venv myvenv
+_cd имя_каталога_с_виртуальным_окружением_
 
-source myvenv/bin/activate
+_python3.8 -m venv myvenv_
 
-git clone (ссылка на репу для клонирования)
+_source myvenv/bin/activate_
 
-cd имя_каталога_склонированного_репозитирия
+_git clone (ссылка на репу для клонирования)_
 
-touch .gitignore
+_cd имя_каталога_склонированного_репозитирия_
 
-Добавляем в документ .gitignore:
+_touch .gitignore_
 
-*.sqlite3
-*.pyc
+**Добавляем в документ .gitignore:**
 
-Апгрейдим пипку, что бы не ругался и стартуем проект:
+_*.sqlite3_
+_*.pyc_
 
-pip install --upgrade pip
+**Апгрейдим пипку, что бы не ругался и стартуем проект:**
 
-pip install Django==2.2.9   (вставить номер актуальной для конкретного проекта версии django)
+_pip install --upgrade pip_
 
-django-admin startproject имя_проекта .
+_pip install Django==2.2.9   (вставить номер актуальной для конкретного проекта версии django)_
 
-Сразу правим в settings.py нужные поля:
+_django-admin startproject имя_проекта_
 
-TIME_ZONE = 'Europe/Moscow'
+**Сразу правим в settings.py нужные поля:**
 
-LANGUAGE_CODE = 'ru-ru'
+_TIME_ZONE = 'Europe/Moscow'_
 
-STATIC_URL = '/static/'
+_LANGUAGE_CODE = 'ru-ru'_
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+_STATIC_URL = '/static/'_
 
-Проверяем стартует ли сервер разработки:
+_STATIC_ROOT = os.path.join(BASE_DIR, 'static')_
 
-python manage.py runserver
+**Проверяем стартует ли сервер разработки:**
 
-Выполняем миграции в базу данных (в дальнейшем придется перевыполнить их из-за аутентификации):
+_python manage.py runserver_
 
-python manage.py migrate
+**Выполняем миграции в базу данных (в дальнейшем придется перевыполнить их из-за аутентификации):**
 
-Создаем приложение:
+_python manage.py migrate_
 
-python manage.py startapp имя_приложения
+**Создаем приложение:**
 
-Добавляем прилодение в список приложений в settings.py:
+_python manage.py startapp имя_приложения_
 
-INSTALLED_APPS = [
+**Добавляем прилодение в список приложений в settings.py:**
+
+_INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,5 +63,5 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'имя_приложения',
-]
+]_
 
