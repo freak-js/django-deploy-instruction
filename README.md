@@ -204,7 +204,7 @@ _sudo nano /etc/nginx/sites-available/имя_проекта_
 ```
 server {
     listen 80;
-    server_name 45.128.204.29;
+    server_name указать_ip_сервера_без_кавычек;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
